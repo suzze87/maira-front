@@ -50,7 +50,7 @@ const BarComponentDoughnut: React.FC<any> = ({ questionTitle, questionOptions })
       }
 
       return <div className=" max-w-md select-none">
-        <h1 className="mt-10 mb-5 text-2xl">{ questionTitle }</h1>
+        <h2 className="mt-10 mb-5 text-2xl">{ questionTitle }</h2>
         <Doughnut data={data} options={{responsive:true}}/>
       </div>;
 }
@@ -88,7 +88,7 @@ const Statisc: React.FC = () => {
   }
 
   return questions.map((question: any) => (
-    <div key={question._id} className="Estadisticas"> 
+    <div key={question.id} className="Estadisticas"> 
       <BarComponentDoughnut questionTitle={question.title} questionOptions={question.options}/>
     </div>
   ));

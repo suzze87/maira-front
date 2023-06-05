@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuth } from "../../hooks/auth";
 import api from "../../services/api";
+import Loading from "../../Components/Loading";
 
 const AddQuestion: React.FC = () => {
   const { cookies } = useAuth();
+  const [loading, setLoading] = useState(false);
+
   const [pregunta, setPregunta] = useState("");
   const [opciones, setOpciones] = useState([] as any);
   const llenarOpcion = (id: number, titulo: string) => {
@@ -51,8 +54,9 @@ const AddQuestion: React.FC = () => {
                 },
               }
             );
+
             if (res.status === 201) {
-              optionsArr.push(res.data._id);
+              optionsArr.push(res.data);
             }
           }
         }
@@ -66,6 +70,7 @@ const AddQuestion: React.FC = () => {
 
   const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const token = cookies.authmaira;
       if (!pregunta || !pregunta.length) {
@@ -90,7 +95,7 @@ const AddQuestion: React.FC = () => {
         }
       );
       if (res.status === 201) {
-        console.log("La pregunta se cargo ", res.data._id);
+        console.log("La pregunta se cargo ", res.data.id);
         toast.success("La pregunta se cargo con  exito!");
         setPregunta("");
         setOpciones([]);
@@ -98,6 +103,8 @@ const AddQuestion: React.FC = () => {
       console.log("Respuesta ", res.data);
     } catch (er) {
       console.log("Error cargando pregunta ", er);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -143,9 +150,13 @@ const AddQuestion: React.FC = () => {
         </div>
 
         <div className="md:flex md:items-center justify-center">
-          <button className="mt-5  shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
-            Cargar Pregunta
-          </button>
+          {loading ? (
+            <Loading />
+          ) : (
+            <button className="mt-5  shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
+              Cargar Pregunta
+            </button>
+          )}
         </div>
       </form>
     </div>

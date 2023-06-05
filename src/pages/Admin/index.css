@@ -1,30 +1,34 @@
 .Collapsible {
-    padding: 20px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    padding: 20px  !important;
+    border: 1px solid #ccc  !important;
+    margin-bottom: 10px  !important;
+    margin-top: 10px  !important;
 }
 
 .Collapsible span {
-    font-weight: bold;
+    font-weight: bold  !important;
 }
 
 .Collapsible pre {
-    border-top: 1px solid #f0ebeb;
-    margin-top: 5px;
-    padding-top: 5px;
+    border-top: 1px solid #f0ebeb  !important;
+    margin-top: 5px !important;
+    padding-top: 5px !important;
 }
 
 
 .Collapsible p {
-    border-top: 1px solid #f0ebeb;
-    margin-top: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    border-top: 1px solid #f0ebeb !important;
+    margin-top: 10px  !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
  
 }
 
 .Estadisticas {
     margin-top:10px;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #ccc !important;
+}
+
+.PreguntaDiv {
+    border-top: 1px solid #ccc !important;
 }
