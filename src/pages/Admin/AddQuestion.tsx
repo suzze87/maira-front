@@ -133,7 +133,7 @@ const AddQuestion: React.FC = () => {
         toast.success("La pregunta se cargo con  exito!");
         setPregunta("");
         setOpciones([]);
-        setSelectedImage(null)
+        setSelectedImage(null);
       }
       /* console.log("Respuesta ", res.data); */
     } catch (er) {
@@ -158,18 +158,22 @@ const AddQuestion: React.FC = () => {
         </div>
 
         <div className="md:flex md:items-center mb-6">
-          <label className="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4" htmlFor="inline-full-image">
-            Imagen
-          </label>
-          <input name="inline-full-image" type="file" accept="image/jpeg, image/png, image/gif" onChange={handleImageChange} />
-          {selectedImage && (
-            <>
-              <img src={URL.createObjectURL(selectedImage)} alt="Imagen seleccionada" width={180} height={37} />
-              <ButtonToolbar className="ml-auto">
-                <Button onClick={() => setSelectedImage(null)}> Quitar </Button>
-              </ButtonToolbar>
-            </>
-          )}
+          <div className="md:w-1/3">
+            <label className="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4" htmlFor="inline-full-image">
+              Imagen
+            </label>
+          </div>
+          <div className="md:w-2/3">
+            <input name="inline-full-image" type="file" accept="image/jpeg, image/png, image/gif" onChange={handleImageChange} />
+            {selectedImage && (
+              <>
+                <img src={URL.createObjectURL(selectedImage)} alt="Imagen seleccionada" width={180} height={37} />
+                <ButtonToolbar className="ml-auto">
+                  <Button onClick={() => setSelectedImage(null)}> Quitar </Button>
+                </ButtonToolbar>
+              </>
+            )}
+          </div>
         </div>
 
         <div className="md:flex md:items-center mb-6">
