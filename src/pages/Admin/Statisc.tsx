@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect,   useState } from "react";
 import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
-import { Bar } from "react-chartjs-2";
-import api from "../../services/api";
+  import api from "../../services/api";
 import 'react-tabs/style/react-tabs.css';
 import './index.css'
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);

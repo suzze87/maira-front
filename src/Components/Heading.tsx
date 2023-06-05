@@ -18,6 +18,7 @@ const Heading: React.FC = () => {
     if (pathName === "/admin") {
       setHeadTxt("- ZONA ADMINISTRACION -");
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [window.location.pathname]);
 
   return (

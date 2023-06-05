@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { PropsWithChildren, createContext, useContext, useMemo, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
@@ -42,6 +43,7 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
       user,
       setUser,
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [cookies]
   );
 

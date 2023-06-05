@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useAuth } from "../../hooks/auth";
 
 export default function Login() {
@@ -10,7 +10,8 @@ export default function Login() {
   });
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = ( e: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => setLoading(false), []);
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     login({ email: formValues.email, password: formValues.password });
   };
@@ -25,7 +26,7 @@ export default function Login() {
   return (
     <form onSubmit={handleLogin}>
       <div className="mb-6">
-        <input autoComplete="email"  required type="email" name="email" value={formValues.email} onChange={handleChange} placeholder="Correo Electronico" className={`${input_style}`} />
+        <input autoComplete="email" required type="email" name="email" value={formValues.email} onChange={handleChange} placeholder="Correo Electronico" className={`${input_style}`} />
       </div>
       <div className="mb-6">
         <input autoComplete="current-password" required type="password" name="password" value={formValues.password} onChange={handleChange} placeholder="Contraseña" className={`${input_style}`} />
