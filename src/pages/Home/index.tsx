@@ -23,9 +23,9 @@ export default function Home() {
           // eslint-disable-next-line prefer-const
           let tmpArr = {} as any;
 
-          for (let i = 0; i < res.data.length; i++) {
+          for (let i = 0; i < res.data.length; i++) { 
             tmpArr[res.data[i].title] = {
-              options: res.data[i].options,
+              options: res.data[i].options.sort((a:any, b:any) => a.name.localeCompare(b.name)),
               selected: null,
             };
           }
