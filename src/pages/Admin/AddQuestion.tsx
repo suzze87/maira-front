@@ -133,6 +133,7 @@ const AddQuestion: React.FC = () => {
         toast.success("La pregunta se cargo con  exito!");
         setPregunta("");
         setOpciones([]);
+        setSelectedImage(null)
       }
       /* console.log("Respuesta ", res.data); */
     } catch (er) {
