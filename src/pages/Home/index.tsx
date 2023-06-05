@@ -2,14 +2,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
+import './index.css'
 // eslint-disable-next-line prefer-const
 import toast from "react-hot-toast";
 import Loading from "../../Components/Loading";
+import Success from '../../assets/pngwing.com.png'
 export default function Home() {
   const [questions, setQuestions] = useState([]);
   const [suggestion, setSuggestion] = useState("");
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const [success, setSuccess] = useState(false);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
@@ -90,7 +94,8 @@ export default function Home() {
       toast.success("La encuesta fue enviada con exito. Muchas gracias por su colaboración!");
 
       await setTimeout(() => {
-        window.location.reload();
+       /*  window.location.reload(); */
+       setSuccess(true)
       }, 1200);
     } catch (error) {
       /* console.log("Form error", error); */
@@ -122,6 +127,17 @@ export default function Home() {
       </div>
     );
   };
+
+
+  if(success){
+    return(
+      <div className="Success"> 
+        <img className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert" src={Success} alt="Next.js Logo" width={100} height={100} />
+        <h2>Encuesta enviada</h2>
+        <h4>Gracias!</h4>
+      </div>
+     )
+  }
 
   return (
     <form onSubmit={handleForm} className="mb-4 text-left w-full mt-4">
@@ -160,5 +176,5 @@ export default function Home() {
         <div className="flex justify-center pt-10">{loading ? <Loading /> : <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Enviar Encuesta</button>}</div>
       </div>
     </form>
-  );
+  );  
 }
