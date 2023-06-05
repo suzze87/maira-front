@@ -122,7 +122,9 @@ const AddQuestion: React.FC = () => {
           </div>
         </div>
 
-        <div className="md:flex md:items-center mb-6"></div>
+        <div className="md:flex md:items-center mb-6">
+         
+        </div>
 
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3">

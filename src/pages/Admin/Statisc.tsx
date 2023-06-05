@@ -37,11 +37,13 @@ const BarComponentDoughnut: React.FC<any> = ({ questionTitle, questionOptions })
           <strong>Total de encuestados:</strong> {questionOptions.reduce((acumulador: any, pregunta: any) => acumulador + pregunta.value, 0)}
         </p>
         {questionOptions && questionOptions.length && questionOptions.length >= 1
-          ? questionOptions.map((option: any) => (
-              <p>
-                {option.name} <strong> ( % {Number(((option.value / questionOptions.reduce((acumulador: any, pregunta: any) => acumulador + pregunta.value, 0)) * 100).toFixed(1))} ) </strong>
-              </p>
-            ))
+          ? questionOptions
+              .sort((a: any, b: any) => a.name.localeCompare(b.name))
+              .map((option: any) => (
+                <p key={option.name}>
+                  {option.name} <strong> ( % {Number(((option.value / questionOptions.reduce((acumulador: any, pregunta: any) => acumulador + pregunta.value, 0)) * 100).toFixed(1))} ) </strong>
+                </p>
+              ))
           : null}
       </div>
       <Doughnut data={data} options={{ responsive: true }} />

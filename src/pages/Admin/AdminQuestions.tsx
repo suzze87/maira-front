@@ -4,18 +4,46 @@ import api from "../../services/api";
 import Collapsible from "react-collapsible";
 import { Button, ButtonToolbar } from "rsuite";
 import { Modal } from "rsuite";
+import { useAuth } from "../../hooks/auth";
+import toast from "react-hot-toast";
 
 const AdminQuestions: React.FC = () => {
+  const { cookies } = useAuth();
   const [questions, setQuestions] = useState([] as any);
-  const [open, setOpen] = React.useState(false);
-  const [toDelete, setToDelete] = useState<string | null>(null);
+  const [openDeleteQuestion, setOpenDeleteQuestion] = React.useState(false);
+  const [questionToDelete, setQuestionToDelete] = useState<string | null>(null);
+  const handleOpenDeleteQuestion = (questionId: string) => {
+    setQuestionToDelete(questionId);
+    setOpenDeleteQuestion(true);
+  };
+  const handleCloseDeleteQuestion = () => setOpenDeleteQuestion(false);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
+
+  const deleteQuestionHandler = async () => {
+    try {
+      const token = cookies.authmaira;
+      const res = await api.delete("/question/" + questionToDelete, {
+        headers: {
+          "content-type": "application/json",
+          "x-access-token": token,
+        },
+      });
+      console.log("  eliminando pregunta res", res);
+      if(res.status === 204){
+        toast.success("La pregunta se cargo con  exito!");
+        handleCloseDeleteQuestion()
+        setTimeout(()=>{
+          window.location.reload()
+        },800)
+      }
+    } catch (error) {
+      console.log("Error eliminando pregunta ", error);
+    }
+  };
 
   useEffect(() => {
     const cargarPreguntas = async () => {
-        setToDelete(null)
       try {
         const res = await api("/question");
         if (res.status === 200) {
@@ -29,7 +57,7 @@ const AdminQuestions: React.FC = () => {
             };
           }
 
-      /*     console.log("RES DATA ", res.data); */
+          /*     console.log("RES DATA ", res.data); */
         }
       } catch (error) {
         /* console.log("Error cargando las preguntas ", error); */
@@ -38,7 +66,6 @@ const AdminQuestions: React.FC = () => {
     cargarPreguntas();
   }, []);
 
- 
   return (
     <>
       <div>
@@ -46,17 +73,17 @@ const AdminQuestions: React.FC = () => {
         {questions && questions.length && questions.length >= 1
           ? questions.map((question: any) => (
               <Collapsible key={question.id} trigger={`Pregunta ID: #${question.id}`}>
-                <p>
-                  {question.title}
-                  <div className="flex mt-10">
+                <div className="pt-5">
+                  <p className="mt-5"> {question.title}</p>
+                  <div className="flex mt-5 mb-6">
                     <ButtonToolbar className="ml-auto">
                       <Button> Editar Pregunta</Button>
                     </ButtonToolbar>
                     <ButtonToolbar className="ml-auto">
-                      <Button onClick={() => handleOpen()}> Eliminar Pregunta</Button>
+                      <Button onClick={() => handleOpenDeleteQuestion(question.id)}> Eliminar Pregunta</Button>
                     </ButtonToolbar>
                   </div>
-                </p>
+                </div>
                 <div className="PreguntaDiv">
                   {question.options && question.options.length && question.options.length >= 1
                     ? question.options.map((option: any) => (
@@ -77,17 +104,19 @@ const AdminQuestions: React.FC = () => {
           : null}
       </div>
 
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={openDeleteQuestion} onClose={handleCloseDeleteQuestion}>
         <Modal.Header>
-          <Modal.Title>Eliminación de sugerencia</Modal.Title>
+          <Modal.Title>Eliminar pregunta</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Estas por eliminar la sugerencia con id: {toDelete}</p>
+          <p>Estas por eliminar la Pregunta con id: {questionToDelete}</p>
           <p>Estas seguro de proceder?</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button appearance="primary">Ok</Button>
-          <Button onClick={handleClose} appearance="subtle">
+          <Button onClick={() => deleteQuestionHandler()} appearance="primary">
+            Ok
+          </Button>
+          <Button onClick={handleCloseDeleteQuestion} appearance="subtle">
             Cancelar
           </Button>
         </Modal.Footer>
