@@ -5,7 +5,7 @@ import "./index.css";
 import api from "../../services/api";
 import moment from "moment";
 import "moment/locale/es";
-import { Modal, Button, ButtonToolbar, Placeholder } from "rsuite";
+import { Modal, Button, ButtonToolbar  } from "rsuite";
 import { useAuth } from "../../hooks/auth";
 import toast from "react-hot-toast";
 

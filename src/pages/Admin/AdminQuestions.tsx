@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 import Collapsible from "react-collapsible";
 import { Button, ButtonToolbar } from "rsuite";
-import { Modal, Placeholder } from "rsuite";
+import { Modal } from "rsuite";
 
 const AdminQuestions: React.FC = () => {
   const [questions, setQuestions] = useState([] as any);
@@ -14,6 +15,7 @@ const AdminQuestions: React.FC = () => {
 
   useEffect(() => {
     const cargarPreguntas = async () => {
+        setToDelete(null)
       try {
         const res = await api("/question");
         if (res.status === 200) {
@@ -36,8 +38,7 @@ const AdminQuestions: React.FC = () => {
     cargarPreguntas();
   }, []);
 
-  const eliminarPregunta = async (idPregunta: string) => {};
-
+ 
   return (
     <>
       <div>
