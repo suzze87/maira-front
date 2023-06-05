@@ -39,7 +39,7 @@ const BarComponentDoughnut: React.FC<any> = ({ questionTitle, questionOptions })
         {questionOptions && questionOptions.length && questionOptions.length >= 1
           ? questionOptions.map((option: any) => (
               <p>
-                {option.name} <strong> ( % {Number(((option.value / questionOptions.reduce((acumulador: any, pregunta: any) => acumulador + pregunta.value, 0)) * 100).toFixed(3))} ) </strong>
+                {option.name} <strong> ( % {Number(((option.value / questionOptions.reduce((acumulador: any, pregunta: any) => acumulador + pregunta.value, 0)) * 100).toFixed(1))} ) </strong>
               </p>
             ))
           : null}
