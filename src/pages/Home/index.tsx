@@ -148,7 +148,7 @@ export default function Home() {
         </>
 
         <div className="max-w-2xl mx-auto">
-          <h2>Sugerencia</h2>
+          <h2 className="text-1xl">Sugerencia</h2>
           <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
             ¡Nos encantaría conocer tus recomendaciones personales para mejorar la seguridad vial! Por favor, comparte cualquier sugerencia, consejo o experiencia que consideres importante. Tu aporte es valioso para crear un entorno vial más seguro para todos. ¡Gracias por contribuir!
           </label>
