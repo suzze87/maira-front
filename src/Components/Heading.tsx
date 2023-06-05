@@ -32,7 +32,7 @@ const Heading: React.FC = () => {
           <p className="text-2xl font-semibold">SEMINARIO DE SEGURIDAD VIAL</p>
         </div>
         <div className="flex items-center justify-center mb-4 mt-3">
-          <h2 className="text-1xl font-normal">{headTxt}</h2>
+          <p className="text-1xl font-normal">{headTxt}</p>
         </div>
         {window.location.pathname === "/admin" && (
           <div className="flex items-center justify-center mb-9 mt-3">
