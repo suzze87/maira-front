@@ -1,61 +1,54 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect,   useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
-  import api from "../../services/api";
-import 'react-tabs/style/react-tabs.css';
-import './index.css'
+import api from "../../services/api";
+import "react-tabs/style/react-tabs.css";
+import "./index.css";
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
- 
-import { Doughnut } from 'react-chartjs-2';
+import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
- 
- 
-
 const BarComponentDoughnut: React.FC<any> = ({ questionTitle, questionOptions }) => {
-    
-    const data = {
-        
-        labels: [ ]as any,
-        datasets: [
-          {
-            label: '# de  Votos',
-            data: [ ] as any,
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)',
-            ],
-            borderWidth: 1,
-          },
-        ],
-      };
-      
-      for (let i = 0; i < questionOptions.length; i++) {
-        data.labels.push(questionOptions[i].name );
-        data.datasets[0].data.push(questionOptions[i].value);
-      }
+  const data = {
+    labels: [] as any,
+    datasets: [
+      {
+        label: "# de  Votos",
+        data: [] as any,
+        backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)"],
+        borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)", "rgba(75, 192, 192, 1)", "rgba(153, 102, 255, 1)", "rgba(255, 159, 64, 1)"],
+        borderWidth: 1,
+      },
+    ],
+  };
 
-      return <div className=" max-w-md select-none">
-        <h2 className="mt-10 mb-5 text-2xl">{ questionTitle }</h2>
-        <Doughnut data={data} options={{responsive:true}}/>
-      </div>;
-}
+  for (let i = 0; i < questionOptions.length; i++) {
+    data.labels.push(questionOptions[i].name);
+    data.datasets[0].data.push(questionOptions[i].value);
+  }
 
- 
+  return (
+    <div className=" max-w-md select-none">
+      <h2 className="mt-10 mb-5 text-2xl">{questionTitle}</h2>
+      <div className="Statiscs">
+        <p>
+          <strong>Total de encuestados:</strong> {questionOptions.reduce((acumulador: any, pregunta: any) => acumulador + pregunta.value, 0)}
+        </p>
+        {questionOptions && questionOptions.length && questionOptions.length >= 1
+          ? questionOptions.map((option: any) => (
+              <p>
+                {option.name} <strong> ( % {Number(((option.value / questionOptions.reduce((acumulador: any, pregunta: any) => acumulador + pregunta.value, 0)) * 100).toFixed(3))} ) </strong>
+              </p>
+            ))
+          : null}
+      </div>
+      <Doughnut data={data} options={{ responsive: true }} />
+    </div>
+  );
+};
+
 const Statisc: React.FC = () => {
   const [questions, setQuestions] = useState([] as any);
 
@@ -88,8 +81,8 @@ const Statisc: React.FC = () => {
   }
 
   return questions.map((question: any) => (
-    <div key={question.id} className="Estadisticas"> 
-      <BarComponentDoughnut questionTitle={question.title} questionOptions={question.options}/>
+    <div key={question.id} className="Estadisticas">
+      <BarComponentDoughnut questionTitle={question.title} questionOptions={question.options} />
     </div>
   ));
 };
