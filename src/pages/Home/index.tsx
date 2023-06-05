@@ -148,6 +148,7 @@ export default function Home() {
         </>
 
         <div className="max-w-2xl mx-auto">
+          <h2>Sugerencia</h2>
           <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
             ¡Nos encantaría conocer tus recomendaciones personales para mejorar la seguridad vial! Por favor, comparte cualquier sugerencia, consejo o experiencia que consideres importante. Tu aporte es valioso para crear un entorno vial más seguro para todos. ¡Gracias por contribuir!
           </label>
@@ -156,7 +157,7 @@ export default function Home() {
 
         <br />
         <br />
-        <div className="flex justify-center">{loading ? <Loading /> : <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Enviar Encuesta</button>}</div>
+        <div className="flex justify-center pt-10">{loading ? <Loading /> : <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Enviar Encuesta</button>}</div>
       </div>
     </form>
   );
