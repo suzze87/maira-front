@@ -5,8 +5,8 @@ export default function Login() {
   const { login } = useAuth();
 
   const [formValues, setFormValues] = useState({
-    email: "admin@localhost",
-    password: "admin",
+    email: "",
+    password: "",
   });
   const [loading, setLoading] = useState(false);
 

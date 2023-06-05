@@ -74,10 +74,10 @@ const Statisc: React.FC = () => {
             };
           }
 
-          console.log("RES DATA ", res.data);
+          /* console.log("RES DATA ", res.data); */
         }
       } catch (error) {
-        console.log("Error cargando las preguntas ", error);
+        /* console.log("Error cargando las preguntas ", error); */
       }
     };
     cargarPreguntas();

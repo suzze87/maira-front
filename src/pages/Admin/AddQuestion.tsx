@@ -63,7 +63,7 @@ const AddQuestion: React.FC = () => {
       }
       return optionsArr;
     } catch (er) {
-      console.log("Error cargando opciones ", er);
+      /* console.log("Error cargando opciones ", er); */
       return [];
     }
   };
@@ -83,7 +83,7 @@ const AddQuestion: React.FC = () => {
       }
       const opcionesCargadas = await cargarOpciones();
 
-      console.log("Opciones opcionesCargadas ", opcionesCargadas);
+     /*  console.log("Opciones opcionesCargadas ", opcionesCargadas); */
       const res = await api.post(
         "/question",
         { title: pregunta, options: opcionesCargadas },
@@ -95,14 +95,14 @@ const AddQuestion: React.FC = () => {
         }
       );
       if (res.status === 201) {
-        console.log("La pregunta se cargo ", res.data.id);
+       /*  console.log("La pregunta se cargo ", res.data.id); */
         toast.success("La pregunta se cargo con  exito!");
         setPregunta("");
         setOpciones([]);
       }
-      console.log("Respuesta ", res.data);
+      /* console.log("Respuesta ", res.data); */
     } catch (er) {
-      console.log("Error cargando pregunta ", er);
+    /*   console.log("Error cargando pregunta ", er); */
     } finally {
       setLoading(false);
     }

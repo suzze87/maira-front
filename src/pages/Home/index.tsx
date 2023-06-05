@@ -19,7 +19,7 @@ export default function Home() {
         const res = await api("/question");
         if (res.status === 200) {
           setQuestions(res.data);
-          console.log("Questions response ", res.data);
+        /*   console.log("Questions response ", res.data); */
           // eslint-disable-next-line prefer-const
           let tmpArr = {} as any;
 
@@ -32,7 +32,7 @@ export default function Home() {
           setOptions(tmpArr as any);
         }
       } catch (error) {
-        console.log("Error cargando las preguntas ", error);
+        /* console.log("Error cargando las preguntas ", error); */
       }
     };
     cargarPreguntas();
@@ -53,7 +53,7 @@ export default function Home() {
           }
         );
         if (ressuggestion.status === 201) {
-          console.log("La sugerencia se cargo ", ressuggestion.data);
+          /* console.log("La sugerencia se cargo ", ressuggestion.data); */
           setSuggestion("");
         }
       }
@@ -64,10 +64,10 @@ export default function Home() {
 
         const selectedAnswer = (options[questionTitle] as any).selected;
 
-        console.log("Questions Found questionId ", questionId);
+      /*   console.log("Questions Found questionId ", questionId);
         console.log("Questions Found questionTitle ", questionTitle);
         console.log("Questions Found answer ", selectedAnswer);
-        console.log("Questions Found options ", (questions[i] as any).options);
+        console.log("Questions Found options ", (questions[i] as any).options); */
 
         if (!selectedAnswer || selectedAnswer === null || typeof selectedAnswer === "undefined") {
           toast.error("Error: Debes seleccionar una opcion por pregunta!");
@@ -84,7 +84,7 @@ export default function Home() {
           }
         );
 
-        console.log("Seend encuesta  ", res);
+        /* console.log("Seend encuesta  ", res); */
       }
 
       toast.success("La encuesta fue enviada con exito. Muchas gracias por su colaboración!");
@@ -93,7 +93,7 @@ export default function Home() {
         window.location.reload();
       }, 1200);
     } catch (error) {
-      console.log("Form error", error);
+      /* console.log("Form error", error); */
       toast.error("Ocurrio un error al enviar la encuesta. Por favor complete todos los campos e intente de nuevo!");
     } finally {
       setLoading(false);

@@ -44,7 +44,7 @@ const Suggestions: React.FC = () => {
         }
       }
     } catch (error) {
-      console.log("Error eliminando la sugerencia");
+    /*   console.log("Error eliminando la sugerencia"); */
     }
   };
 
@@ -54,7 +54,7 @@ const Suggestions: React.FC = () => {
 
       if (response && response.status === 200) {
         setSugerencias(response.data);
-        console.log("Response suggestions ", response.data);
+        /* console.log("Response suggestions ", response.data); */
       }
     };
     fetchSugerencias();
