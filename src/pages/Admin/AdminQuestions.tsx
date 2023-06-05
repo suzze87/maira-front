@@ -42,7 +42,7 @@ const AdminQuestions: React.FC = () => {
   return (
     <>
       <div>
-        <pre>(maira) Esta parte no esta terminada!!</pre>
+        <pre className="mt-12 mb-12">(maira) Esta parte no esta terminada!!</pre>
         {questions && questions.length && questions.length >= 1
           ? questions.map((question: any) => (
               <Collapsible key={question.id} trigger={`Pregunta ID: #${question.id}`}>
