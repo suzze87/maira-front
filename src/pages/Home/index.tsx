@@ -60,7 +60,7 @@ export default function Home() {
 
       for (let i = 0; i < questions.length; i++) {
         const questionTitle = (questions[i] as any).title;
-        const questionId = (questions[i] as any).id;
+       /*  const questionId = (questions[i] as any).id; */
 
         const selectedAnswer = (options[questionTitle] as any).selected;
 
@@ -74,7 +74,7 @@ export default function Home() {
           return;
         }
 
-        const res = await api.patch(
+        await api.patch(
           "/option/" + selectedAnswer,
           {},
           {
