@@ -1,0 +1,30 @@
+.Collapsible {
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.Collapsible span {
+    font-weight: bold;
+}
+
+.Collapsible pre {
+    border-top: 1px solid #f0ebeb;
+    margin-top: 5px;
+    padding-top: 5px;
+}
+
+
+.Collapsible p {
+    border-top: 1px solid #f0ebeb;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+ 
+}
+
+.Estadisticas {
+    margin-top:10px;
+    border-top: 1px solid #ccc;
+}
