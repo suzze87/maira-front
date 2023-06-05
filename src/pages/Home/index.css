@@ -7,3 +7,8 @@
     align-content: center;
     margin-bottom: 20px;
   }
+
+  .Question {
+    border-bottom: 1px solid #f0ebeb !important;
+    padding-bottom: 15px;
+  }

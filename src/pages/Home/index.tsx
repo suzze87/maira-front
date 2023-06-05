@@ -27,6 +27,7 @@ export default function Home() {
           // eslint-disable-next-line prefer-const
           let tmpArr = {} as any;
 
+          
           for (let i = 0; i < res.data.length; i++) { 
             tmpArr[res.data[i].title] = {
               options: res.data[i].options.sort((a:any, b:any) => a.name.localeCompare(b.name)),
@@ -144,8 +145,11 @@ export default function Home() {
       <div className="flex flex-col">
         {questions && questions.length && questions.length >= 1
           ? questions.map((question: any) => (
-              <div key={question.id}>
-                <label className="block text-gray-700 font-bold mb-2 mt-5">{question.title}</label>
+              <div key={question.id} className="Question">
+                <label className="block text-gray-700 text-lg  font-bold mb-5 mt-5">{question.title}</label>
+                {question.picture && question.picture.length && question.picture.length >=1 ? (
+ <img className="mb-5" src={question.picture} alt="Imagen seleccionada" width={180} height={37} />
+                ): null}
                 {question.options && question.options.length && question.options.length >= 1
                   ? (options[question.title] as any).options.map((option: any) => {
                       return <InputCustom key={option.id} questionTitle={question.title} optionId={option.id} optionName={option.name} />;

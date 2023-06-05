@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useAuth } from "../../hooks/auth";
 import api from "../../services/api";
 import Loading from "../../Components/Loading";
+import { Button, ButtonToolbar } from "rsuite";
 
 const AddQuestion: React.FC = () => {
   const { cookies } = useAuth();
@@ -11,6 +12,21 @@ const AddQuestion: React.FC = () => {
 
   const [pregunta, setPregunta] = useState("");
   const [opciones, setOpciones] = useState([] as any);
+
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageChange = (event: any) => {
+    const file = event.target.files[0];
+    const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+
+    if (file && allowedTypes.includes(file.type)) {
+      setSelectedImage(file);
+    } else {
+      setSelectedImage(null);
+      toast.error("Por favor, selecciona un archivo de imagen válido (JPEG, PNG, GIF).");
+    }
+  };
+
   const llenarOpcion = (id: number, titulo: string) => {
     // hacer una copia del arreglo original
     const updatedOpciones = opciones.map((opcion: any) => {
@@ -83,10 +99,28 @@ const AddQuestion: React.FC = () => {
       }
       const opcionesCargadas = await cargarOpciones();
 
-     /*  console.log("Opciones opcionesCargadas ", opcionesCargadas); */
+      let picture = null;
+
+      if (selectedImage) {
+        try {
+          const data = new FormData();
+          data.append("file", selectedImage);
+          data.append("upload_preset", "mairafolder");
+          const resCloud = await fetch("https://api.cloudinary.com/v1_1/dm7xgtdus/image/upload", {
+            method: "POST",
+            body: data,
+          });
+          const cloudFile = await resCloud.json();
+          picture = cloudFile.secure_url;
+        } catch (error) {
+          picture = null;
+        }
+      }
+
+      /*  console.log("Opciones opcionesCargadas ", opcionesCargadas); */
       const res = await api.post(
         "/question",
-        { title: pregunta, options: opcionesCargadas },
+        { title: pregunta, picture, options: opcionesCargadas },
         {
           headers: {
             "content-type": "application/json",
@@ -95,14 +129,14 @@ const AddQuestion: React.FC = () => {
         }
       );
       if (res.status === 201) {
-       /*  console.log("La pregunta se cargo ", res.data.id); */
+        /*  console.log("La pregunta se cargo ", res.data.id); */
         toast.success("La pregunta se cargo con  exito!");
         setPregunta("");
         setOpciones([]);
       }
       /* console.log("Respuesta ", res.data); */
     } catch (er) {
-    /*   console.log("Error cargando pregunta ", er); */
+      /*   console.log("Error cargando pregunta ", er); */
     } finally {
       setLoading(false);
     }
@@ -123,7 +157,18 @@ const AddQuestion: React.FC = () => {
         </div>
 
         <div className="md:flex md:items-center mb-6">
-         
+          <label className="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4" htmlFor="inline-full-image">
+            Imagen
+          </label>
+          <input name="inline-full-image" type="file" accept="image/jpeg, image/png, image/gif" onChange={handleImageChange} />
+          {selectedImage && (
+            <>
+              <img src={URL.createObjectURL(selectedImage)} alt="Imagen seleccionada" width={180} height={37} />
+              <ButtonToolbar className="ml-auto">
+                <Button onClick={() => setSelectedImage(null)}> Quitar </Button>
+              </ButtonToolbar>
+            </>
+          )}
         </div>
 
         <div className="md:flex md:items-center mb-6">
