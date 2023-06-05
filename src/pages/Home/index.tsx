@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
@@ -36,7 +37,7 @@ export default function Home() {
   const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      if (suggestion && suggestion.length && suggestion.length >= 1) { 
+      if (suggestion && suggestion.length && suggestion.length >= 1) {
         const ressuggestion = await api.post(
           "/suggestion",
           { value: suggestion },
@@ -83,9 +84,9 @@ export default function Home() {
 
       toast.success("La encuesta fue enviada con exito. Muchas gracias por su colaboración!");
 
-      await setTimeout(()=>{
-        window.location.reload()
-      },1200)
+      await setTimeout(() => {
+        window.location.reload();
+      }, 1200);
     } catch (error) {
       console.log("Form error", error);
       toast.error("Ocurrio un error al enviar la encuesta. Por favor complete todos los campos e intente de nuevo!");
@@ -108,7 +109,7 @@ export default function Home() {
     return (
       <div key={optionId} className="mr-4">
         <label className="inline-flex items-center">
-          <input onChange={(e) => handleOption(optionId, questionTitle)} type="radio" className="form-radio" value={optionId} checked={selected} />
+          <input onChange={(_e) => handleOption(optionId, questionTitle)} type="radio" className="form-radio" value={optionId} checked={selected} />
           <span className="ml-2">{optionName}</span>
         </label>
       </div>
