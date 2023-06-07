@@ -148,7 +148,7 @@ export default function Home() {
               <div key={question.id} className="Question">
                 <label className="block text-gray-700 text-lg  font-bold mb-5 mt-5">{question.title}</label>
                 {question.picture && question.picture.length && question.picture.length >=1 ? (
- <img className="mb-5" src={question.picture} alt="Imagen seleccionada" width={180} height={37} />
+ <img className="mb-5" src={question.picture} alt="Imagen" width={500}  />
                 ): null}
                 {question.options && question.options.length && question.options.length >= 1
                   ? (options[question.title] as any).options.map((option: any) => {
