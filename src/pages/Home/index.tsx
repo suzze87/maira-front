@@ -144,7 +144,7 @@ export default function Home() {
     <form onSubmit={handleForm} className="mb-4 text-left w-full mt-4">
       <div className="flex flex-col">
         {questions && questions.length && questions.length >= 1
-          ? questions.map((question: any) => (
+          ? questions.sort((a:any, b:any) => a.title.localeCompare(b.title)).map((question: any) => (
               <div key={question.id} className="Question">
                 <label className="block text-gray-700 text-lg  font-bold mb-5 mt-5">{question.title}</label>
                 {question.picture && question.picture.length && question.picture.length >=1 ? (
