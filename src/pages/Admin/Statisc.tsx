@@ -59,7 +59,7 @@ const Statisc: React.FC = () => {
       try {
         const res = await api("/question");
         if (res.status === 200) {
-          setQuestions(res.data);
+          setQuestions(res.data.options.sort((a:any, b:any) => a.name.localeCompare(b.name)));
           // eslint-disable-next-line prefer-const
           let tmpArr = {} as any;
           for (let i = 0; i < res.data.length; i++) {
